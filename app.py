@@ -1,12 +1,13 @@
 from urllib import response
 import streamlit as st
-import pickle
+import pickle,gzip
 import pandas as pd
 import requests
 def fetch_poster(movie_id):
     response=requests.get('https://api.themoviedb.org/3/movie/{}?api_key=592784c9620a62aa2bbf6f0f0b0acb4b&language=en-US'.format(movie_id))
     data=response.json()
     return "https://image.tmdb.org/t/p/w500/" + data['poster_path']
+    
 similarity=pickle.load(open('similarity.pkl','rb'))
 def recommend(movie):
     movie_index=movies[movies['title']==movie].index[0]
